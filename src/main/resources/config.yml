@@ -4,3 +4,5 @@ database:
   username: user
   password: super_secret2
   name: minecraft_structure
+scoreboard:
+  active: true
