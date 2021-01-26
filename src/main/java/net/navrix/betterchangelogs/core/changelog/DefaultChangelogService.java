@@ -1,12 +1,12 @@
-package net.navrix.betterchangelogs.core.changelog.impl;
+package net.navrix.betterchangelogs.core.changelog;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import net.navrix.betterchangelogs.core.cache.changelog.ChangelogCache;
-import net.navrix.betterchangelogs.core.changelog.Changelog;
-import net.navrix.betterchangelogs.core.changelog.ChangelogService;
+import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.api.ChangelogService;
 import net.navrix.betterchangelogs.repository.changelog.ChangelogRepository;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

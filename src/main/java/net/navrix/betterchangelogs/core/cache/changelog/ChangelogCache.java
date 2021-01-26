@@ -1,7 +1,7 @@
 package net.navrix.betterchangelogs.core.cache.changelog;
 
 import com.google.common.cache.Cache;
-import net.navrix.betterchangelogs.core.changelog.Changelog;
+import net.navrix.betterchangelogs.api.Changelog;
 
 import java.util.function.Consumer;
 

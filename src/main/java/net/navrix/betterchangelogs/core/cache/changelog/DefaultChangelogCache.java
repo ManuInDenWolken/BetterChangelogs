@@ -4,8 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.cache.CacheStats;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import lombok.SneakyThrows;
-import net.navrix.betterchangelogs.core.changelog.Changelog;
+import net.navrix.betterchangelogs.api.Changelog;
 
 import java.util.Map;
 import java.util.concurrent.Callable;

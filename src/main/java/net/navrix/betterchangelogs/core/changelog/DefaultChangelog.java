@@ -1,11 +1,11 @@
-package net.navrix.betterchangelogs.core.changelog.impl;
+package net.navrix.betterchangelogs.core.changelog;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.navrix.betterchangelogs.core.changelog.Changelog;
+import net.navrix.betterchangelogs.api.Changelog;
 import org.bukkit.Location;
 
 import java.util.Date;

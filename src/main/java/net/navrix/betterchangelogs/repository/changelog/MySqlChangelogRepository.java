@@ -5,14 +5,13 @@ import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import net.navrix.betterchangelogs.core.changelog.Changelog;
-import net.navrix.betterchangelogs.core.changelog.impl.DefaultChangelog;
+import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.core.changelog.DefaultChangelog;
 import net.navrix.betterchangelogs.util.ReflectionUtil;
 import net.navrix.betterchangelogs.util.StringSerializableLocation;
 import org.bukkit.Location;
 
 import javax.sql.DataSource;
-import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.Date;
 

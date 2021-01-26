@@ -2,7 +2,7 @@ package net.navrix.betterchangelogs;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import net.navrix.betterchangelogs.core.changelog.ChangelogService;
+import net.navrix.betterchangelogs.api.ChangelogService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +14,8 @@ public final class BetterChangelogsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        saveDefaultConfig();
 
         setupAndStartDependencyInjection();
 

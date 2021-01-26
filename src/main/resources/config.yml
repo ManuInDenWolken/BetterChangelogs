@@ -1,0 +1,6 @@
+database:
+  address: localhost
+  port: 3306
+  username: user
+  password: super_secret2
+  name: minecraft_structure
