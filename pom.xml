@@ -58,11 +58,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysqlConnector.version}</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
             <version>${lettuce.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
