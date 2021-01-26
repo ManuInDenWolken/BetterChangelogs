@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @AllArgsConstructor
-public class BetterChangelogsModule extends AbstractModule {
+public final class BetterChangelogsModule extends AbstractModule {
 
     private BetterChangelogsPlugin plugin;
 

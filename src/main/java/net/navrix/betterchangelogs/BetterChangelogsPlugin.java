@@ -7,10 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class BetterChangelogsPlugin extends JavaPlugin {
+public final class BetterChangelogsPlugin extends JavaPlugin implements BetterChangelogsApiProvider {
 
     private Injector injector;
-    private ChangelogService service;
+    private ChangelogService changelogService;
 
     @Override
     public void onEnable() {
@@ -47,4 +47,8 @@ public final class BetterChangelogsPlugin extends JavaPlugin {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
+    @Override
+    public ChangelogService getChangelogService() {
+        return changelogService;
+    }
 }
