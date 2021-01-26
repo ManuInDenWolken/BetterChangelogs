@@ -8,10 +8,37 @@ BetterChangelogs is a plug-in for the popular minecraft server software
 You're able to view this collection of created changelogs in a fancy graphical
 interface in game.
 
-### How to use the API in my code?
-Here could be your advertisement.
+### How to use the API in my Code?
+#### Basic Usage
+```java
+BetterChangelogsApiProvider apiProvider = BetterChangelogsApiProvider.get();
+ChangelogService changelogService = apiProvider.getChangelogService();
 
-### Can I contribute to this awesome project?
+// Do something...
+```
+
+#### Manage Changelogs
+```java
+ChangelogService changelogService = apiProvider.getChangelogService();
+
+Changelog myChangelog = Changelog.create(1, "My Changelog", ChatColor.RED +
+  "Your optional name", location);
+changelogService.createOrUpdateChangelog(myChangelog); // Create (or update) a changelog
+
+Optional<Changelog> changelog = changelogService.getChangelog(1);
+if (changelog.orNull() == myChangelog) { // true
+    changelogService.deleteChangelog(myChangelog);
+}
+
+System.out.println(changelogService.getChangelog(myChangelog.getKey()).isPresent());
+```
+
+Output:
+```shell
+false
+```
+
+### Can I contribute to this awesome Project?
 Surely. If you want to contribute, you have to fork the repository. Also you
 have to adhere to some conventions:
 - Every commit is marked in beginning with a symbol (https://gitmoji.dev/)
