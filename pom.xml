@@ -12,6 +12,8 @@
         <junit.version>4.13</junit.version>
         <guice.version>4.0</guice.version>
         <spigot.version>1.8.8-R0.1-SNAPSHOT</spigot.version>
+        <mysqlConnector.version>8.0.23</mysqlConnector.version>
+        <lettuce.version>6.0.2.RELEASE</lettuce.version>
     </properties>
 
     <name>BetterChangelogs</name>
@@ -50,6 +52,16 @@
             <artifactId>spigot-api</artifactId>
             <version>${spigot.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlConnector.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>${lettuce.version}</version>
         </dependency>
     </dependencies>
 
