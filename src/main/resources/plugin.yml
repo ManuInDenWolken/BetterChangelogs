@@ -1,0 +1,9 @@
+name: ${project.name}
+version: ${project.version}
+author: ManuInDenWolken
+description: BetterChangelogs is a plugin that allows you to administrate public
+  changelogs on your minecraft server.
+main: ${project.groupId}.${project.artifactId}.BetterChangelogsPlugin
+website: https://www.navrix.net/
+commands:
+
