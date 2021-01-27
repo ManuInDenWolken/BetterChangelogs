@@ -1,6 +1,6 @@
 package net.navrix.betterchangelogs.repository.changelog;
 
-import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.api.changelog.Changelog;
 import net.navrix.betterchangelogs.repository.Repository;
 
 import java.util.List;

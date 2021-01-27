@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.api.changelog.Changelog;
 import net.navrix.betterchangelogs.core.changelog.DefaultChangelog;
 import net.navrix.betterchangelogs.util.ReflectionUtil;
 import net.navrix.betterchangelogs.util.StringSerializableLocation;

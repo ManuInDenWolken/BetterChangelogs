@@ -9,7 +9,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import net.navrix.betterchangelogs.core.cache.changelog.ChangelogCache;
 import net.navrix.betterchangelogs.core.cache.changelog.DefaultChangelogCache;
-import net.navrix.betterchangelogs.api.ChangelogService;
+import net.navrix.betterchangelogs.api.changelog.ChangelogService;
 import net.navrix.betterchangelogs.core.changelog.DefaultChangelogService;
 import net.navrix.betterchangelogs.repository.changelog.ChangelogRepository;
 import net.navrix.betterchangelogs.repository.changelog.MySqlChangelogRepository;

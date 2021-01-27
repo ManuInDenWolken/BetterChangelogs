@@ -5,7 +5,7 @@ import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.api.changelog.Changelog;
 import org.bukkit.Location;
 
 import java.util.Date;

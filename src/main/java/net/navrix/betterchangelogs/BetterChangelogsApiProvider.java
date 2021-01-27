@@ -1,6 +1,6 @@
 package net.navrix.betterchangelogs;
 
-import net.navrix.betterchangelogs.api.ChangelogService;
+import net.navrix.betterchangelogs.api.changelog.ChangelogService;
 import org.bukkit.Bukkit;
 
 public interface BetterChangelogsApiProvider {

@@ -1,7 +1,7 @@
-package net.navrix.betterchangelogs.api;
+package net.navrix.betterchangelogs.api.changelog;
 
 import com.google.common.base.Optional;
-import net.navrix.betterchangelogs.api.Changelog;
+import net.navrix.betterchangelogs.api.changelog.Changelog;
 
 import java.util.List;
 
