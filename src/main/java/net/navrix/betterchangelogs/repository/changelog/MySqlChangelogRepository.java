@@ -2,6 +2,7 @@ package net.navrix.betterchangelogs.repository.changelog;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -14,6 +15,7 @@ import org.bukkit.Location;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MySqlChangelogRepository implements ChangelogRepository {
@@ -54,14 +56,7 @@ public final class MySqlChangelogRepository implements ChangelogRepository {
         try {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String optionalName = resultSet.getString("optionalName");
-                Location location = StringSerializableLocation.fromString(resultSet.getString("location")).getLocation();
-                Date date = resultSet.getTimestamp("dateOfCreation");
-                Changelog changelog = optionalName.equals("null") ?
-                    DefaultChangelog.create(id, name, location) : DefaultChangelog.create(id, name, optionalName, location);
-                ReflectionUtil.setAttributeValue(changelog, "dateOfCreation", date);
-                return Optional.of(changelog);
+                return Optional.of(resultSetToChangelog(resultSet));
             }
         } catch (SQLException | IllegalAccessException | NoSuchFieldException exception) {
             exception.printStackTrace();
@@ -93,6 +88,39 @@ public final class MySqlChangelogRepository implements ChangelogRepository {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Changelog> findAll() {
+        Statement statement = null;
+        try {
+            statement = connection().createStatement();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        List<Changelog> changelogList = Lists.newArrayList();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM changelogs");
+            while (resultSet.next()) {
+                if (resultSet.isLast()) break;
+                changelogList.add(resultSetToChangelog(resultSet));
+            }
+        } catch (SQLException | IllegalAccessException | NoSuchFieldException exception) {
+            exception.printStackTrace();
+        }
+        return changelogList;
+    }
+
+    private Changelog resultSetToChangelog(ResultSet resultSet) throws SQLException, NoSuchFieldException, IllegalAccessException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        String optionalName = resultSet.getString("optionalName");
+        Location location = StringSerializableLocation.fromString(resultSet.getString("location")).getLocation();
+        Date date = resultSet.getTimestamp("dateOfCreation");
+        Changelog changelog = optionalName.equals("null") ?
+            DefaultChangelog.create(id, name, location) : DefaultChangelog.create(id, name, optionalName, location);
+        ReflectionUtil.setAttributeValue(changelog, "dateOfCreation", date);
+        return changelog;
     }
 
     @SneakyThrows

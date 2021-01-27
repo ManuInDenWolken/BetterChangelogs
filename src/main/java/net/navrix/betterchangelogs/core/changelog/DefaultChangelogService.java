@@ -8,6 +8,12 @@ import net.navrix.betterchangelogs.core.cache.changelog.ChangelogCache;
 import net.navrix.betterchangelogs.api.Changelog;
 import net.navrix.betterchangelogs.api.ChangelogService;
 import net.navrix.betterchangelogs.repository.changelog.ChangelogRepository;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class DefaultChangelogService implements ChangelogService {
@@ -15,10 +21,19 @@ public class DefaultChangelogService implements ChangelogService {
     private ChangelogCache cache;
     private ChangelogRepository repository;
 
-    public static ChangelogService create(ChangelogCache cache, ChangelogRepository repository) {
+    public static ChangelogService createAndStart(ChangelogCache cache, ChangelogRepository repository) {
         Preconditions.checkNotNull(cache, "Cache may not be null");
         Preconditions.checkNotNull(repository, "Repository may not be null");
-        return new DefaultChangelogService(cache, repository);
+        DefaultChangelogService service = new DefaultChangelogService(cache, repository);
+        service.start();
+        return service;
+    }
+
+    private void start() {
+        Bukkit.getScheduler().runTaskAsynchronously(Bukkit.getPluginManager().getPlugin("BetterChangelogs"), () -> {
+            repository.findAll().forEach(changelog -> cache.put(changelog.getKey(), changelog));
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "All changelogs loaded!");
+        });
     }
 
     @Override
@@ -28,11 +43,9 @@ public class DefaultChangelogService implements ChangelogService {
 
     @Override
     public Optional<Changelog> getChangelog(int id) {
-        Changelog changelog;
+        Changelog changelog = null;
         if (cache.isPresent(id))
             changelog = cache.getIfPresent(id);
-        else
-            changelog = repository.read(id).orNull();
         return Optional.fromNullable(changelog);
     }
 
@@ -40,6 +53,11 @@ public class DefaultChangelogService implements ChangelogService {
     public void deleteChangelog(Changelog changelog) {
         cache.invalidate(changelog.getKey());
         repository.delete(changelog);
+    }
+
+    @Override
+    public List<Changelog> getAllChangelogs() {
+        return StreamSupport.stream(cache.getAllPresent().spliterator(), true).collect(Collectors.toList());
     }
 
     @Override

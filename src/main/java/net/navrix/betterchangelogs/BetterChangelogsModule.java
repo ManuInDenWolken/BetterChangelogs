@@ -36,7 +36,7 @@ public final class BetterChangelogsModule extends AbstractModule {
     public ChangelogService provideChangelogService() {
         ChangelogRepository repository = MySqlChangelogRepository.create(generateDataSource());
         ChangelogCache cache = new DefaultChangelogCache();
-        return DefaultChangelogService.create(cache, repository);
+        return DefaultChangelogService.createAndStart(cache, repository);
     }
 
     private DataSource generateDataSource() {
