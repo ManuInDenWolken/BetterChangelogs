@@ -26,6 +26,8 @@ public final class BetterChangelogsPlugin extends JavaPlugin implements BetterCh
     @Override
     public void onDisable() {
 
+        changelogService.shutdown();
+
         sendToConsole("&7Plugin disabled successfully.");
 
     }
