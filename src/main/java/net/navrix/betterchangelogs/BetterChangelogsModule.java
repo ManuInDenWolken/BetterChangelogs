@@ -7,15 +7,24 @@ import com.google.inject.Singleton;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
+import net.navrix.betterchangelogs.api.centity.ChangelogEntityService;
+import net.navrix.betterchangelogs.api.inventory.PageableInventory;
 import net.navrix.betterchangelogs.core.cache.changelog.ChangelogCache;
 import net.navrix.betterchangelogs.core.cache.changelog.DefaultChangelogCache;
 import net.navrix.betterchangelogs.api.changelog.ChangelogService;
+import net.navrix.betterchangelogs.core.centity.DefaultChangelogEntityService;
 import net.navrix.betterchangelogs.core.changelog.DefaultChangelogService;
 import net.navrix.betterchangelogs.repository.changelog.ChangelogRepository;
 import net.navrix.betterchangelogs.repository.changelog.MySqlChangelogRepository;
+import net.navrix.betterchangelogs.repository.entity.ChangelogEntityRepository;
+import net.navrix.betterchangelogs.repository.entity.DefaultChangelogEntityRepository;
+import net.navrix.betterchangelogs.util.config.Config;
+import net.navrix.betterchangelogs.util.config.YamlConfig;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 @AllArgsConstructor
@@ -29,7 +38,11 @@ public final class BetterChangelogsModule extends AbstractModule {
     }
 
     @Override
-    protected void configure() { }
+    protected void configure() {
+
+        bind(BetterChangelogsPlugin.class).toInstance(plugin);
+
+    }
 
     @Singleton
     @Provides
@@ -37,6 +50,33 @@ public final class BetterChangelogsModule extends AbstractModule {
         ChangelogRepository repository = MySqlChangelogRepository.create(generateDataSource());
         ChangelogCache cache = new DefaultChangelogCache();
         return DefaultChangelogService.createAndStart(cache, repository);
+    }
+
+    @Singleton
+    @Provides
+    public ChangelogEntityService provideChangelogEntityService() {
+        ChangelogEntityRepository repository = DefaultChangelogEntityRepository.create(getProvider(Config.class).get(),
+            getProvider(PageableInventory.class).get());
+        return DefaultChangelogEntityService.createAndStart(getProvider(PageableInventory.class).get(), repository);
+    }
+
+    @Singleton
+    @Provides
+    public PageableInventory providePageableInventory() {
+        return null;
+    }
+
+    @Singleton
+    @Provides
+    public Config provideChangelogEntityConfig() {
+        Config config = null;
+        File file = new File("plugins/BetterChangelogs/entities.yml");
+        try {
+            config = YamlConfig.create(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return config;
     }
 
     private DataSource generateDataSource() {

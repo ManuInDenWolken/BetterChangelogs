@@ -1,15 +1,19 @@
 package net.navrix.betterchangelogs.api.changelog;
 
 import com.google.common.base.Optional;
-import net.navrix.betterchangelogs.api.changelog.Changelog;
+import org.bukkit.Location;
 
 import java.util.List;
 
 public interface ChangelogService {
 
-    void createOrUpdateChangelog(Changelog changelog);
+    Changelog createChangelog(String name, String optionalName, Location location);
+
+    Changelog createChangelog(String name, Location location);
 
     Optional<Changelog> getChangelog(int id);
+
+    void updateChangelog(Changelog changelog);
 
     void deleteChangelog(Changelog changelog);
 

@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
-public class DefaultChangelogCache implements ChangelogCache {
+public final class DefaultChangelogCache implements ChangelogCache {
 
     private Map<Integer, Changelog> changelogs = Maps.newHashMap();
 

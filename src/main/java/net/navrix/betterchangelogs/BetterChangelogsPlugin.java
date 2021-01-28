@@ -2,6 +2,8 @@ package net.navrix.betterchangelogs;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import lombok.Getter;
+import net.navrix.betterchangelogs.api.centity.ChangelogEntityService;
 import net.navrix.betterchangelogs.api.changelog.ChangelogService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,7 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class BetterChangelogsPlugin extends JavaPlugin implements BetterChangelogsApiProvider {
 
     private Injector injector;
-    private ChangelogService changelogService;
+    @Getter private ChangelogService changelogService;
+    @Getter private ChangelogEntityService changelogEntityService;
 
     @Override
     public void onEnable() {
@@ -49,8 +52,4 @@ public final class BetterChangelogsPlugin extends JavaPlugin implements BetterCh
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
-    @Override
-    public ChangelogService getChangelogService() {
-        return changelogService;
-    }
 }

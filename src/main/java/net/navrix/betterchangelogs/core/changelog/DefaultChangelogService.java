@@ -10,13 +10,14 @@ import net.navrix.betterchangelogs.api.changelog.ChangelogService;
 import net.navrix.betterchangelogs.repository.changelog.ChangelogRepository;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class DefaultChangelogService implements ChangelogService {
+public final class DefaultChangelogService implements ChangelogService {
 
     private ChangelogCache cache;
     private ChangelogRepository repository;
@@ -37,8 +38,17 @@ public class DefaultChangelogService implements ChangelogService {
     }
 
     @Override
-    public void createOrUpdateChangelog(Changelog changelog) {
+    public Changelog createChangelog(String name, String optionalName, Location location) {
+        Changelog changelog = DefaultChangelog.create((int) (cache.size()+1), name, optionalName, location);
         cache.put(changelog.getKey(), changelog);
+        return changelog;
+    }
+
+    @Override
+    public Changelog createChangelog(String name, Location location) {
+        Changelog changelog = DefaultChangelog.create((int) (cache.size()+1), name, location);
+        cache.put(changelog.getKey(), changelog);
+        return changelog;
     }
 
     @Override
@@ -47,6 +57,11 @@ public class DefaultChangelogService implements ChangelogService {
         if (cache.isPresent(id))
             changelog = cache.getIfPresent(id);
         return Optional.fromNullable(changelog);
+    }
+
+    @Override
+    public void updateChangelog(Changelog changelog) {
+        cache.put(changelog.getKey(), changelog);
     }
 
     @Override

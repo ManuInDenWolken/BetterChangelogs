@@ -12,7 +12,7 @@ import java.util.Date;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class DefaultChangelog implements Changelog {
+public final class DefaultChangelog implements Changelog {
 
     private int key;
     private String name;

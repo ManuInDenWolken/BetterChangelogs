@@ -14,6 +14,7 @@
         <spigot.version>1.8.8-R0.1-SNAPSHOT</spigot.version>
         <mysqlConnector.version>8.0.23</mysqlConnector.version>
         <lettuce.version>6.0.2.RELEASE</lettuce.version>
+        <hikari.version>4.0.1</hikari.version>
     </properties>
 
     <name>BetterChangelogs</name>
@@ -66,7 +67,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>4.0.1</version>
+            <version>${hikari.version}</version>
         </dependency>
     </dependencies>
 
