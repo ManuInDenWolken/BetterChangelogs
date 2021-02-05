@@ -1,5 +1,7 @@
 # BetterChangelogs
 
+## Attention: This project is no longer maintained.
+
 ### What does BetterChangelogs?
 
 BetterChangelogs is a plug-in for the popular minecraft server software
